@@ -1,4 +1,5 @@
 *.ts linguist-language=JavaScript
-
+tsconfig.json linguist-vendored
 node_modules/* linguist-vendored
 dist/* linguist-vendored
+.next/* linguist-vendored
