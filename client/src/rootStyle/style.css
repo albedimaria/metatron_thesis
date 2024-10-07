@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+
+    --main-color: #007bff;
+    --primary-hover-color: #013d80;
+    --secondary-color: #ccc;
+    --secondary-hover-color: #bbb;
+    --soft-white-text-color: #fefefe;
+    --background-color: #fefefe;
+    --popup-background-color: white;
+    --popup-border-color: #ddd;
+    --button-text-color: white;
+    --button-hover-text-color: black;
+    --background-container: #181c20;
+
+    --button-width: 110px;
+    --button-height: 150px;
+    --text-size: 11px;
+}
+
+body {
+    background: #013d80;
+    font-family: inter;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 90%;
+}
+
+.canvas {
+    /*
+    pointer-events: none;
+    */
+    position: absolute !important;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+
+.label > div
+{
+    font-family: Helvetica, Arial;
+    position: absolute;
+    background-color: #181c20; /* Use --background-color with reduced opacity */
+    color: var(--soft-white-text-color);
+    padding: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 8px;
+    user-select: none;
+}
+
+.features > div
+{
+    font-family: Helvetica, Arial;
+    position: absolute;
+    padding: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 30px;
+    user-select: none;
+}
+
+.modal > div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main > div {
+    position:fixed;
+    background-color: red;
+    width: 80%;
+    height: auto;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.display-block > div {
+    display: block;
+    background-color: red;
+}
+
+.display-none {
+    display: none;
+}
+
+
+

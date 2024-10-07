@@ -1,0 +1,38 @@
+.slider {
+    position: relative;
+}
+
+.slider::before {
+    background: linear-gradient(0deg, #525252 0px, #373737 100%);
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    position: absolute;
+    content: '';
+    z-index: 1; /* Ensure this is behind the knob */
+}
+
+.knob {
+    width: 10em;
+    height: 10em;
+    position: relative;
+    z-index: 2; /* Make sure the knob is above the pseudo-element */
+}
+
+.knob::before,
+.knob::after,
+.slider::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.knob::before {
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    box-shadow: 0px 0px 10px #349beb;
+}

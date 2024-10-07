@@ -1,0 +1,21 @@
+.folder-drop-button {
+    /* Set a minimum width and allow it to grow */
+    min-width: 100px;
+    width: var(--button-width);
+    padding: 10px 15px; /* Add padding for better touch targets on smaller screens */
+    background-color: var(--main-color); /* Slightly darker on hover for feedback */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+    color: var(--soft-white-text-color);
+    text-font: var(--text-size)
+
+
+
+}
+
+.folder-drop-button:hover {
+    background-color: var(--primary-hover-color);
+}

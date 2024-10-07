@@ -1,0 +1,23 @@
+.outside-container {
+    padding: 10px;
+    display: flex;
+    width: 500px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around; /* Adjust spacing between elements */
+    background-color: var(--background-container); /* Optional: background color */
+    z-index: 1000;
+    box-shadow: 0 0 9px 0 #00000088;
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 999; /* Just below the popup */
+}
+

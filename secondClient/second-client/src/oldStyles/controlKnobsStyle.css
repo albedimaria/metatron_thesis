@@ -1,0 +1,13 @@
+.knobsContainer{
+    position: absolute;
+    width: 600px;
+    height: 160px;
+    background-color: red;
+}
+
+.labelKnob {
+    margin-top: 150px;  /* Adjust the margin as needed */
+    text-align: center;
+    font-size: 12px;  /* Adjust the font size as needed */
+    color: white;     /* Set the color of the label text */
+}

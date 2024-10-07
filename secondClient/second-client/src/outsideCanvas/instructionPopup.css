@@ -1,0 +1,17 @@
+.floating-ui-button {
+    min-width: 50px;
+    width: auto;
+    padding: 10px;
+    background-color: var(--main-color); /* Slightly darker on hover for feedback */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    color: var(--soft-white-text-color);
+}
+
+.floating-ui-button:hover {
+    background-color: var(--primary-hover-color); /* Slightly darker on hover for feedback */
+}
+

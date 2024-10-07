@@ -1,0 +1,66 @@
+/* Style for the Clear Cache button */
+.clear-cache-button {
+    /* Set a minimum width and allow it to grow */
+    min-width: 100px;
+    width: var(--button-width);
+    padding: 10px 15px; /* Add padding for better touch targets on smaller screens */
+    background-color: var(--main-color); /* Slightly darker on hover for feedback */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+    color: #fefefe
+}
+
+.clear-cache-button:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Style for the confirmation popup */
+.confirmation-popup {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--background-color);
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 300px; /* Fixed width for the popup */
+    text-wrap: none;
+}
+
+.confirmation-popup p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.confirmation-popup button {
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 16px;
+    margin: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.confirmation-popup button:hover {
+    background-color: var(--primary-hover-color);
+}
+
+/* Additional style for the 'No' button to make it less prominent */
+.confirmation-popup button:last-child {
+    background-color: #ccc;
+    color: black;
+}
+
+.confirmation-popup button:last-child:hover {
+    background-color: #bbb;
+}
