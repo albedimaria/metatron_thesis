@@ -1,0 +1,4 @@
+*.ts linguist-language=JavaScript
+
+node_modules/* linguist-vendored
+dist/* linguist-vendored
