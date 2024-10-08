@@ -131,6 +131,11 @@ Start the React devlopment server:
 
 You will need to run both `client` and `secondClient` to fully interact with the system. The frontend servers should run on different ports (`http://localhost:3001` and `http://localhost:3002`), and the backend on `http://localhost:5000`.
 
+## Executive Summary
+
+An **Executive Summary** document is available in the repository to provide a detailed overview of how the system works, including its purpose, key features, and the underlying concepts. You can find the document in the available files, and it is recommended to review it for a deeper understanding of the project.
+
+
 ## Contact
 If you have any questions, feel free to reach out:
 - **Email**: dimaria.alberto@outlook.com
