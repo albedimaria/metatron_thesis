@@ -35,3 +35,96 @@ This system allows users to visualize, analyze, and generate music in a continuo
 
 ### Other:
 - **WebSocket**: Used for real-time communication between the clients, enabling dynamic interaction.
+
+## Installation
+
+### Prerequisites
+- **Python 3.x** (for the backend)
+- **Node.js and npm** (for the frontend)
+
+### Clone the Repository
+1. Clone the repository to your local machine:
+   ```bash
+   git clone https://github.com/albedimaria/metatron_thesis.git
+   ```
+   ```bash
+   cd metatron_thesis
+   ```
+
+2. Setting up the backend (python environment)
+   ```bash
+   cd backend_thesis
+   ```
+   ```bash
+   python3 -m venv env
+   ```
+   ```bash
+   source env/bin/activate  # On Windows use `env\Scripts\activate`
+   ```
+   ```bash
+   pip install -r requirements.txt
+   ```
+- `requirements.txt` file containing the list of required libraries can be found inside the `backend_thesis` folder. In case of issues, you can manually install the libraries with the following command:
+
+  ```bash
+   pip install libraryName
+   ```
+**To install Essentia**  
+To install Essentia use the following link with the instructions:
+  - https://essentia.upf.edu/download.html
+
+**Note**: downloading and installing Essentia requires several steps and may encounter issues along the way, particularly depending on your system setup. It is recommended to carefully follow the provided installation guide.
+
+**Platform Requirements**
+- Essentia can run natively on **macOS** and **Linux**.
+- **Windows** users will need to install and run **Windows Subsystem for Linux** (WSL) to use Essentia, as it does not natively support Windows.
+
+3. Setting up the frontend (React)
+   
+   - There are two React apps that need to be installed and run: `client` and `secondClient`.
+
+   Setting up `client`:
+   ```bash
+   cd ../frontend_thesis
+   ```
+   ```bash
+   npm install
+   ```
+
+   Setting up `secondClient`:
+   ```bash
+   cd ../secondClient
+   ```
+   ```bash
+   npm install
+   ```
+
+## Running the Application
+
+### Running the backend
+Start the backend server (ensure the virtual environment is activated):
+   ```bash
+   python main.py
+   ```
+### Running the frontend
+**First Client:**  
+Navigate to the `client` directory:
+   ```bash
+   cd frontend_thesis/client
+   ```
+Start the React devlopment server:
+   ```bash
+   npm start
+   ```
+
+**Second Client:**  
+Navigate to the `secondClient` directory:
+   ```bash
+   cd frontend_thesis/secondClient
+   ```
+Start the React devlopment server:
+   ```bash
+   npm start
+   ```
+
+You will need to run both `client` and `secondClient` to fully interact with the system. The frontend servers should run on different ports (`http://localhost:3001` and `http://localhost:3002`), and the backend on `http://localhost:5000`.
