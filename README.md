@@ -69,15 +69,6 @@ This system allows users to visualize, analyze, and generate music in a continuo
   ```bash
    pip install libraryName
    ```
-**To install Essentia**  
-To install Essentia use the following link with the instructions:
-  - https://essentia.upf.edu/download.html
-
-**Note**: downloading and installing Essentia requires several steps and may encounter issues along the way, particularly depending on your system setup. It is recommended to carefully follow the provided installation guide.
-
-**Platform Requirements**
-- Essentia can run natively on **macOS** and **Linux**.
-- **Windows** users will need to install and run **Windows Subsystem for Linux** (WSL) to use Essentia, as it does not natively support Windows.
 
 3. Setting up the frontend (React)
    
@@ -98,6 +89,17 @@ To install Essentia use the following link with the instructions:
    ```bash
    npm install
    ```
+
+     
+### To install Essentia  
+`Backend` is based on Essentia's library from MTG: to install it use the following link with the instructions:
+  - https://essentia.upf.edu/download.html
+
+**Note**: downloading and installing Essentia requires several steps and may encounter issues along the way, particularly depending on your system setup. It is recommended to carefully follow the provided installation guide.
+
+**Platform Requirements**
+- Essentia can run natively on **macOS** and **Linux**.
+- **Windows** users will need to install and run **Windows Subsystem for Linux** (WSL) to use Essentia, as it does not natively support Windows.
 
 ## Running the Application
 
@@ -128,3 +130,7 @@ Start the React devlopment server:
    ```
 
 You will need to run both `client` and `secondClient` to fully interact with the system. The frontend servers should run on different ports (`http://localhost:3001` and `http://localhost:3002`), and the backend on `http://localhost:5000`.
+
+## Contact
+If you have any questions, feel free to reach out:
+- **Email**: dimaria.alberto@outlook.com
