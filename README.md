@@ -131,6 +131,14 @@ Start the React devlopment server:
 
 You will need to run both `client` and `secondClient` to fully interact with the system. The frontend servers should run on different ports (`http://localhost:3001` and `http://localhost:3002`), and the backend on `http://localhost:5000`.
 
+## Dataset Directory
+
+- To use the dataset for this project, please place your dataset files in the `test_analysis` folder located in the root of the repository.
+- Add your dataset files (e.g., audio files or other relevant formats) inside this folder. The system supports main audio formats such as .mp3, .wav, and others.
+- The system will automatically scan all subfolders within test_analysis for dataset files, so feel free to organize your data into subfolders as needed.
+
+### Instructions:
+
 ## Executive Summary
 
 An **Executive Summary** document is available in the repository to provide a detailed overview of how the system works, including its purpose, key features, and the underlying concepts. You can find the document in the available files, and it is recommended to review it for a deeper understanding of the project.
