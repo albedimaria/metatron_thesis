@@ -23,10 +23,10 @@ This system allows users to visualize, analyze, and generate music in a continuo
 
 ### Frontend:
 - **JavaScript**
-- **CSS**
 - **React**: A JavaScript library for building user interfaces.
 - **React Three Fiber (r3f)**: A powerful renderer for Three.js within React.
-
+- **CSS**
+  
 ### Backend:
 - **Python**
 - **Flask**: A lightweight WSGI web framework for Python.
