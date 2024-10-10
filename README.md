@@ -8,7 +8,7 @@ This system integrates sacred geometry with advanced visualization techniques an
 The project consists of three interconnected clients:
 
 1. **Latent Space Client (LSC)**: A 3D audio visualization tool that lets users interactively analyze audio features.
-2. **Metatron Client (MC)**: A sacred geometry-based tool that maps emotions to audio features using shapes like Metatron’s Cube.
+2. **Metatron Client (MC)**: A tool that maps emotions to audio features using shapes like Metatron’s Cube.
 3. **Generative Client (GC)**: An AI-based music generation platform that uses visual placeholders instead of written prompts to create music.
 
 This system allows users to visualize, analyze, and generate music in a continuous loop, offering an immersive and intuitive interface.
