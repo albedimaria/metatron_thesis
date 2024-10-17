@@ -137,7 +137,6 @@ You will need to run both `client` and `secondClient` to fully interact with the
 - Add your dataset files (e.g., audio files or other relevant formats) inside this folder. The system supports main audio formats such as .mp3, .wav, and others.
 - The system will automatically scan all subfolders within test_analysis for dataset files, so feel free to organize your data into subfolders as needed.
 
-### Instructions:
 
 ## Executive Summary
 
