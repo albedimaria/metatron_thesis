@@ -1,4 +1,3 @@
-import time
 import requests
 
 base_url = 'http://localhost:3000'
@@ -43,7 +42,7 @@ def generate_prompt(data):
     prompt = (
         "ambient track with:\n"
         f"- BPM: {data.get('bpm', 'N/A')}\n"
-        f"- Danceability: {data.get('dance', 'N/A')}\n"
+        # f"- Danceability: {data.get('dance', 'N/A')}\n"
         f"- Mood: {data.get('mood', 'N/A')}\n"
         f"- Instrument: {data.get('instrument', 'N/A')}\n"
         f"- Key: {data.get('key', 'N/A')}\n"
@@ -51,7 +50,7 @@ def generate_prompt(data):
         # f"- Color: {data.get('color', 'N/A')}\n"
         f"- Timbre: {data.get('timbre', 'N/A')}\n"
         # f"- Dynamic Complexity: {data.get('dynamic_complexity_norm', 'N/A')}\n"
-        f"- Texture: {data.get('texture', 'N/A')}\n"
+        # f"- Texture: {data.get('texture', 'N/A')}\n"
         # f"- Reverb: {data.get('reverb', 'N/A')}\n"
         # f"- Clarity: {data.get('clarity', 'N/A')}\n"
     )

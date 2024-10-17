@@ -1,11 +1,13 @@
 import os, json
 import time
-import requests
 import essentia.standard as esstd
 import numpy as np
 from paths.pathsToFolders import dir_path, model_path, json_dir, generated_dir
 from flask import Flask, jsonify
 from flask_cors import CORS
+from dotenv import load_dotenv
+import logging
+import requests
 
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
@@ -23,7 +25,8 @@ from suno_functions import (
     base_url
 )
 
-
+load_dotenv()  # Load variables from .env into environment
+SUNO_COOKIE = os.getenv('SUNO_COOKIE')  # Access the Suno cookie
 
 app = Flask(__name__)
 # Set up CORS to allow specific origins
@@ -294,7 +297,121 @@ def handle_backend_analysis_request():
         emit('backend_analysis_data', {'error': 'File not found'})
 
 
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
+@socketio.on('client2_to_server')
+def handle_data_from_client2(data):
+    try:
+        logger.info("Data received from Client2: %s", data)
+
+        # Validate that the required keys are present in 'data'
+        required_keys = ['instrument', 'mood', 'bpm']
+        missing_keys = [key for key in required_keys if key not in data]
+        if missing_keys:
+            error_message = f"Missing keys in data: {missing_keys}"
+            logger.error(error_message)
+            emit('error', {'message': error_message}, broadcast=True)
+            return
+
+        # Generate a prompt using the placeholders
+        prompt = generate_prompt(data)  # Ensure this function handles exceptions
+        logger.info("Generated prompt: %s", prompt)
+
+        # Call the Suno API to generate music
+        suno_response = generate_audio_by_prompt({
+            "prompt": prompt,
+            "make_instrumental": True,
+            "wait_audio": False
+        })
+        logger.info("Suno API response: %s", suno_response)
+
+        # Check if 'suno_response' is a list with at least two items
+        if isinstance(suno_response, list) and len(suno_response) >= 2:
+            if 'id' in suno_response[0] and 'id' in suno_response[1]:
+                ids = f"{suno_response[0]['id']},{suno_response[1]['id']}"
+                logger.info("Generated IDs: %s", ids)
+            else:
+                error_message = "IDs not found in Suno API response elements."
+                logger.error(error_message)
+                emit('error', {'message': error_message}, broadcast=True)
+                return
+        else:
+            error_message = "Invalid Suno API response format."
+            logger.error(error_message)
+            emit('error', {'message': error_message}, broadcast=True)
+            return
+
+        # Extract features from data
+        feature_1 = data.get('instrument', 'unknown')
+        feature_2 = data.get('mood', 'unknown')
+        feature_3 = data.get('bpm', 'unknown')
+
+        # Check audio status and download when ready
+        for attempt in range(60):
+            audio_data = get_audio_information(ids)  # Ensure this function handles exceptions
+            if audio_data and len(audio_data) >= 2:
+                status_0 = audio_data[0].get("status")
+                status_1 = audio_data[1].get("status")
+                if status_0 == 'streaming' and status_1 == 'streaming':
+                    filename1 = f"generated ~ {feature_1} ~ {feature_2} ~ {feature_3}.mp3"
+                    file_path1 = os.path.join(generated_dir, filename1)
+
+                    try:
+                        # Download the audio file
+                        download_audio(audio_data[0]['audio_url'], file_path1)
+                        logger.info("Downloaded audio file: %s", file_path1)
+                    except Exception as e:
+                        logger.error("Error downloading audio: %s", e)
+                        emit('error', {'message': 'Error downloading audio'}, broadcast=True)
+                        return
+
+                    try:
+                        # Process the audio file (feature extraction, updating JSON files, etc.)
+                        process_audio(file_path1)  # Pass the file path if required
+                        logger.info("Processed audio file: %s", file_path1)
+                    except Exception as e:
+                        logger.error("Error processing audio: %s", e)
+                        emit('error', {'message': 'Error processing audio'}, broadcast=True)
+                        return
+
+                    # Notify clients that a new sample has been generated
+                    emit('new_sample_generated', {'filename': filename1}, broadcast=True)
+                    logger.info("Emitted 'new_sample_generated' event with filename: %s", filename1)
+                    break
+                else:
+                    logger.info("Audio not ready yet. Attempt %d/60", attempt + 1)
+            else:
+                logger.error("Invalid audio_data format or not enough data.")
+                emit('error', {'message': 'Invalid audio data received from Suno API'}, broadcast=True)
+                return
+
+            time.sleep(5)
+        else:
+            # Executed if the loop completes without a 'break'
+            error_message = "Audio generation timed out."
+            logger.error(error_message)
+            emit('error', {'message': error_message}, broadcast=True)
+            return
+
+        # Optionally, emit the processed data back to the frontend or to another client
+        emit('processed_data_from_server', suno_response, broadcast=True)
+        logger.info("Emitted 'processed_data_from_server' event.")
+
+    except Exception as e:
+        # Catch any unexpected exceptions
+        logger.error("An unexpected error occurred: %s", e)
+        emit('error', {'message': 'An unexpected error occurred on the server.'}, broadcast=True)
+
+
+if __name__ == '__main__':
+    socketio.run(app, debug=True)
+
+
+
+"""
+OLD VERSION 
 # Modify the `handle_data_from_client2` function
 @socketio.on('client2_to_server')
 def handle_data_from_client2(data):
@@ -323,9 +440,7 @@ def handle_data_from_client2(data):
             audio_data = get_audio_information(ids)
             if audio_data and audio_data[0]["status"] == 'streaming' and audio_data[1]["status"] == 'streaming':
                 filename1 = f"generated ~ {feature_1} ~ {feature_2} ~ {feature_3}.mp3"
-                # filename2 = f"generated ~ {feature_1} ~ {feature_2} ~ {feature_3}.mp3"
                 download_audio(audio_data[0]['audio_url'], os.path.join(generated_dir, filename1))
-                # download_audio(audio_data[1]['audio_url'], os.path.join(generated_dir, filename2))
 
                 # Call the process_audio function after downloading the audio files
                 process_audio()  # feature extraction and updates JSON files
@@ -334,7 +449,6 @@ def handle_data_from_client2(data):
                 # Notify client1 to restart audio processing
                 emit('new_sample_generated', {'filename1': filename1 }, broadcast=True)
                 break
-
             time.sleep(5)
     else:
         print("No valid IDs received to process audio information.")
@@ -342,7 +456,6 @@ def handle_data_from_client2(data):
     # Optionally, emit the processed data back to the frontend or to another client
     emit('processed_data_from_server', suno_response, broadcast=True)
 
-if __name__ == '__main__':
-    socketio.run(app, debug=True)
+"""
 
 
